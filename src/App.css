@@ -1,0 +1,38 @@
+.wholePageContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  max-height: 100%;
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 100px;
+}
+.input {
+  text-align: center;
+  background-color: #eaeaea;
+  width: 70%;
+  height: 100%;
+}
+.sidebar {
+  background-color: #b2b2b2;
+  width: 30%;
+}
+.guestname {
+  padding: 0px;
+  height: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
