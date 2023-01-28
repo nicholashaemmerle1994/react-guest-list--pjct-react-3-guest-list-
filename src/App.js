@@ -80,7 +80,7 @@ function App() {
           return (
             <div key={guest.id} className="guestname container">
               <div data-test-id="guest">
-                {guest.firstName} {guest.lastName}
+                {guest.firstName} {guest.lastName} {}
               </div>
               <input
                 type="checkbox"
@@ -91,18 +91,6 @@ function App() {
                 }
                 onClick={() => setFuckingUpdate(!fuckingUpdate)}
               />
-              {/* <input
-                aria-label="attending"
-                type="checkbox"
-                checked={guest.attending}
-                onChange={async (event) => {
-                  setIsAttending(event.currentTarget.checked);
-
-                  console.log('innerhalb des inputs', guest.attending);
-
-                  await updateGuest(guest.id);
-                }}
-              /> */}
               <button
                 aria-label={`Remove ${guest.firstName} ${guest.lastName}`}
                 onClick={deletGuest}
