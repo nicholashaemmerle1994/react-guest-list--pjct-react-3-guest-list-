@@ -65,13 +65,11 @@ function App() {
   }
 
   async function guestUpdate(checked, id) {
-    console.log(checked, id);
     await fetch(`${baseUrl}/guests/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ attending: checked }),
     });
-    console.log(id, checked);
   }
   return (
     <div className="wholePageContainer">
