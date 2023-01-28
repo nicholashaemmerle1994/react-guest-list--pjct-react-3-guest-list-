@@ -4,8 +4,7 @@ import Attending from './Attending';
 
 // import NameList from './NameList';
 
-const baseUrl =
-  'https://express-guest-list-api-memory-data-store.nicholashaemmer.repl.co';
+const baseUrl = 'http://localhost:4000';
 function App() {
   const [guestApi, setGuestApi] = useState([]);
   const [disable, setDisable] = useState(true);
@@ -70,6 +69,7 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ attending: checked }),
     });
+    console.log(guestId, checked);
   }
   return (
     <div className="wholePageContainer">
