@@ -82,7 +82,7 @@ function App() {
           return (
             <div key={guest.id} className="guestname container">
               <div data-test-id="guest">
-                {guest.firstName} {guest.lastName} {}
+                {guest.firstName} {guest.lastName}
               </div>
               <input
                 type="checkbox"
