@@ -5,7 +5,7 @@ import Attending from './Attending';
 // import NameList from './NameList';
 
 const baseUrl = 'http://localhost:4000';
-// 'https://express-guest-list-api-memory-data-store.nicholashaemmer.repl.co';
+
 function App() {
   const [guestApi, setGuestApi] = useState([]);
   const [disable, setDisable] = useState(true);
@@ -14,6 +14,7 @@ function App() {
   const [name, setName] = useState({
     firstName: '',
     lastName: '',
+    attending: false,
     // attending: false,
   });
   //  Fetching from the API (on first rednder AND everytime the variable "name" gets updated)
@@ -64,13 +65,13 @@ function App() {
     });
   }
 
-  async function guestUpdate(checked, guestId) {
-    await fetch(`${baseUrl}/guests/${guestId}`, {
+  async function guestUpdate(checked, id) {
+    console.log(checked, id);
+    await fetch(`${baseUrl}/guests/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ attending: checked }),
     });
-    console.log(checked);
   }
   return (
     <div className="wholePageContainer">
