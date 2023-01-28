@@ -13,6 +13,7 @@ function App() {
   const [name, setName] = useState({
     firstName: '',
     lastName: '',
+    attending: false,
     // attending: false,
   });
   //  Fetching from the API (on first rednder AND everytime the variable "name" gets updated)
@@ -63,13 +64,14 @@ function App() {
     });
   }
 
-  async function guestUpdate(checked, guestId) {
-    await fetch(`${baseUrl}/guests/${guestId}`, {
+  async function guestUpdate(checked, id) {
+    console.log(checked, id);
+    await fetch(`${baseUrl}/guests/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ attending: checked }),
     });
-    console.log(guestId, checked);
+    console.log(id, checked);
   }
   return (
     <div className="wholePageContainer">
@@ -80,7 +82,7 @@ function App() {
           return (
             <div key={guest.id} className="guestname container">
               <div data-test-id="guest">
-                {guest.firstName} {guest.lastName} {}
+                {guest.firstName} {guest.lastName}
               </div>
               <input
                 type="checkbox"
