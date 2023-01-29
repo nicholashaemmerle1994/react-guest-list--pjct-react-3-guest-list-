@@ -70,7 +70,6 @@ function App() {
   }
   // Updating a guest
   async function updateGuest(checked, guestId) {
-    console.log(checked);
     await fetch(`${baseUrl}/guests/${guestId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
