@@ -2,8 +2,6 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Attending from './Attending';
 
-// import NameList from './NameList';
-
 const baseUrl = 'http://localhost:4000';
 function App() {
   const [guestApi, setGuestApi] = useState([]);
@@ -14,8 +12,8 @@ function App() {
     firstName: '',
     lastName: '',
     attending: false,
-    // attending: false,
   });
+
   //  Fetching from the API (on first rednder AND everytime the variable "name" gets updated)
   useEffect(() => {
     async function fetchGuests() {
@@ -31,18 +29,14 @@ function App() {
   if (isLoading) {
     return 'Loading...';
   }
+  //  Trying to fetch a single guest
 
-  //  Deletning Function
-  async function deletGuest() {
-    await fetch(`${baseUrl}/guests/${guestApi[0]['id']}`, {
-      method: 'DELETE',
-    });
-    const response = await fetch(`${baseUrl}/guests`);
-    const allGuests = await response.json();
-    setGuestApi(allGuests);
-    setFuckingUpdate(!fuckingUpdate);
-  }
-  //  The function which sends the new guest to the API
+  // async function fetchNewestGuest(id) {
+  //   const response = await fetch(`${baseUrl}/guests/:id`);
+  //   const guest = await response.json();
+  // }
+
+  //  Creating a new guest
   async function handleSubmit(event) {
     event.preventDefault();
     await fetch(`${baseUrl}/guests`, {
@@ -63,13 +57,24 @@ function App() {
       lastName: '',
     });
   }
-
-  async function guestUpdate(checked, id) {
-    await fetch(`${baseUrl}/guests/${id}`, {
+  //  Deletning Function
+  async function deletGuest() {
+    await fetch(`${baseUrl}/guests/${guestApi[0]['id']}`, {
+      method: 'DELETE',
+    });
+    const response = await fetch(`${baseUrl}/guests`);
+    const allGuests = await response.json();
+    setGuestApi(allGuests);
+    setFuckingUpdate(!fuckingUpdate);
+  }
+  // Updating a guest
+  async function updateGuest(checked, guestId) {
+    await fetch(`${baseUrl}/guests/${guestId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ attending: checked }),
     });
+    setFuckingUpdate(!fuckingUpdate);
   }
   return (
     <div className="wholePageContainer">
@@ -78,25 +83,24 @@ function App() {
         {/* mapping over the array, to create div, input and button to every new Guest */}
         {guestApi.map((guest) => {
           return (
-            <div key={guest.id} className="guestname container">
+            <div key={guest.id}>
               <div data-test-id="guest">
                 {guest.firstName} {guest.lastName}
+                <input
+                  type="checkbox"
+                  aria-label="attending"
+                  checked={guest.attending}
+                  onChange={(event) =>
+                    updateGuest(event.currentTarget.checked, guest.id)
+                  }
+                />
+                <button
+                  aria-label={`Remove ${guest.firstName} ${guest.lastName}`}
+                  onClick={() => deletGuest(guest.id)}
+                >
+                  Remove
+                </button>
               </div>
-              <input
-                type="checkbox"
-                aria-label={`${guest.firstName} ${guest.lastName} attending:${guest.attending}`}
-                checked={guest.attending}
-                onChange={(event) =>
-                  guestUpdate(event.currentTarget.checked, guest.id)
-                }
-                onClick={() => setFuckingUpdate(!fuckingUpdate)}
-              />
-              <button
-                aria-label={`Remove ${guest.firstName} ${guest.lastName}`}
-                onClick={deletGuest}
-              >
-                Remove
-              </button>
             </div>
           );
         })}
@@ -104,7 +108,7 @@ function App() {
       <div className="input container">
         <h1>Add someone to your Guestlist</h1>
         <form onSubmit={handleSubmit}>
-          <label>
+          <label htmlFor="firstName">
             First name
             <input
               disabled={disable}
@@ -116,7 +120,7 @@ function App() {
               }}
             />
           </label>
-          <label>
+          <label htmlFor="lastName">
             Last name
             <input
               disabled={disable}
