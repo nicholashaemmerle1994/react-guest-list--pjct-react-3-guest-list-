@@ -109,31 +109,29 @@ function App() {
       <div className="input container">
         <h1>Add someone to your Guestlist</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="firstName">
-            First name
-            <input
-              disabled={disable}
-              placeholder="Vorname"
-              name="firstName"
-              value={name.firstName}
-              onChange={(e) => {
-                setName({ ...name, firstName: e.target.value });
-              }}
-            />
-          </label>
-          <label htmlFor="lastName">
-            Last name
-            <input
-              disabled={disable}
-              placeholder="Nachname"
-              name="lastName"
-              value={name.lastName}
-              onChange={(e) => {
-                setFuckingUpdate(!fuckingUpdate);
-                setName({ ...name, lastName: e.target.value });
-              }}
-            />
-          </label>
+          <label htmlFor="firstName">First name</label>
+          First name
+          <input
+            disabled={disable}
+            placeholder="Vorname"
+            name="firstName"
+            value={name.firstName}
+            onChange={(e) => {
+              setName({ ...name, firstName: e.target.value });
+            }}
+          />
+          <label htmlFor="lastName">Last name</label>
+          Last name
+          <input
+            disabled={disable}
+            placeholder="Nachname"
+            name="lastName"
+            value={name.lastName}
+            onChange={(e) => {
+              setFuckingUpdate(!fuckingUpdate);
+              setName({ ...name, lastName: e.target.value });
+            }}
+          />
           <button>Add new guest</button>
         </form>
       </div>
