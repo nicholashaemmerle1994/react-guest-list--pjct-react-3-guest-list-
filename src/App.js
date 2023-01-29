@@ -2,7 +2,8 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Attending from './Attending';
 
-const baseUrl = 'http://localhost:4000';
+const baseUrl =
+  'https://express-guest-list-api-memory-data-store.nicholashaemmer.repl.co';
 function App() {
   const [guestApi, setGuestApi] = useState([]);
   const [disable, setDisable] = useState(true);
@@ -69,6 +70,7 @@ function App() {
   }
   // Updating a guest
   async function updateGuest(checked, guestId) {
+    console.log(checked);
     await fetch(`${baseUrl}/guests/${guestId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
