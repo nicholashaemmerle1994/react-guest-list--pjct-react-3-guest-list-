@@ -143,7 +143,6 @@ function App() {
             />
           </label>
           <button>Add new guest</button>
-          <button onClick={() => deleteAllGuests}>Delete all guests</button>
         </form>
       </div>
       <Attending guestList={guestApi} />
