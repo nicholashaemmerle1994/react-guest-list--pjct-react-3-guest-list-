@@ -16,27 +16,52 @@
 }
 .input {
   text-align: center;
-  background-color: #eaeaea;
+  background-color: #b9f3fc;
   width: 40%;
   height: 100%;
 }
 .sidebar {
-  background-color: #b2b2b2;
+  background-color: #93c6e7;
   width: 30%;
 }
-.guestname {
+/* .tname {
   padding: 0px;
   height: 30px;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-}
+} */
 body {
   margin: 0;
   padding: 0;
 }
 form {
   display: flex;
+  flex-direction: column;
+}
+
+.attending {
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 50%;
+  width: 100%;
+  background-color: #93c6e7;
+}
+
+.notAttending {
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 50%;
+  width: 100%;
+  background-color: #93c6e7;
+}
+
+.filterContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   flex-direction: column;
 }

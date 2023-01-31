@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Attending from './Attending';
 
 const baseUrl =
-  'https://express-guest-list-api-memory-data-store.nicholashaemmer.repl.co';
+  'https://express-guest-list-api-memory-data-store-1.nicholashaemmer.repl.co';
 function App() {
   const [guestApi, setGuestApi] = useState([]);
   const [disable, setDisable] = useState(true);
@@ -30,12 +30,6 @@ function App() {
   if (isLoading) {
     return 'Loading...';
   }
-  //  Trying to fetch a single guest
-
-  // async function fetchNewestGuest(id) {
-  //   const response = await fetch(`${baseUrl}/guests/:id`);
-  //   const guest = await response.json();
-  // }
 
   //  Creating a new guest
   async function handleSubmit(event) {
@@ -58,13 +52,27 @@ function App() {
       lastName: '',
     });
   }
+
+  //  Deletning All Guests Function
+  async function deleteAllGuests() {
+    for (const guest of guestApi) {
+      console.log(guest.id);
+      await fetch(`${baseUrl}/guests/${guest.id}`, {
+        method: 'DELETE',
+      });
+    }
+    const response = await fetch(`${baseUrl}/guests`);
+    const allGuests = await response.json();
+    setGuestApi(allGuests);
+  }
   //  Deletning Function
-  async function deletGuest() {
-    await fetch(`${baseUrl}/guests/${guestApi[0]['id']}`, {
+  async function deletGuest(id) {
+    await fetch(`${baseUrl}/guests/${id}`, {
       method: 'DELETE',
     });
     const response = await fetch(`${baseUrl}/guests`);
     const allGuests = await response.json();
+    console.log(allGuests);
     setGuestApi(allGuests);
     setFuckingUpdate(!fuckingUpdate);
   }
@@ -135,9 +143,10 @@ function App() {
             />
           </label>
           <button>Add new guest</button>
+          <button onClick={() => deleteAllGuests}>Delete all guests</button>
         </form>
       </div>
-      <Attending />
+      <Attending guestList={guestApi} />
     </div>
   );
 }
